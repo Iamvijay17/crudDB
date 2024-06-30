@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://clevermerkle2:EckzTOeZjqb1POOi@curddb.r9ufyvy.mongodb.net/?retryWrites=true&w=majority&appName=curdDB', {
+mongoose.connect(`mongodb+srv://clevermerkle2:EckzTOeZjqb1POOi@curddb.r9ufyvy.mongodb.net/?retryWrites=true&w=majority&appName=curdDB`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(()=>{
@@ -104,6 +104,8 @@ async function getItem(req, res, next) {
     }
 }
 
-
+app.listen(PORT, () => {
+    console.log(`Server started on port on http://localhost:${PORT}`);
+});
 
 // clevermerkle2@tomorjerry.com
