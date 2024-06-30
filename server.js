@@ -2,26 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Item = require('./models/item');
+require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect(`mongodb+srv://clevermerkle2:EckzTOeZjqb1POOi@curddb.r9ufyvy.mongodb.net/?retryWrites=true&w=majority&appName=curdDB`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(()=>{
-    console.log('Live Db connected')
-    app.listen(PORT, () => {
-        console.log(`Server started on port on http://localhost:${PORT}`);
-    });
-    
-}).catch((err)=>{
-    console.log('Db Error', err)
+const connectDB = require("./connectDB");
 
-});
+connectDB();
+
+
+
+
 
 
 const dbName = 'crudDB';
@@ -42,7 +36,7 @@ app.post('/items', async (req, res) => {
 
 app.get('/', (req, res) => {
     console.log('working')
-    res.send('Hello World! asds');
+    res.send('Hello World!');
 });
 
 // Read all items
@@ -104,4 +98,7 @@ async function getItem(req, res, next) {
     }
 }
 
+app.listen(PORT, () => {
+    console.log(`Server started on port on http://localhost:${PORT}`);
+});
 // clevermerkle2@tomorjerry.com
