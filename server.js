@@ -104,8 +104,4 @@ async function getItem(req, res, next) {
     }
 }
 
-app.listen(PORT, () => {
-    console.log(`Server started on port on http://localhost:${PORT}`);
-});
-
 // clevermerkle2@tomorjerry.com
