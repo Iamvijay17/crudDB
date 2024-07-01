@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URL)
+        await mongoose.connect(`mongodb://localhost:27017/crudDB`)
         console.log("Connect to MongoDB successfully")
        
     } catch (error) {
