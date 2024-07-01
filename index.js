@@ -40,38 +40,9 @@ app.get('/', (req, res) => {
 });
 
 // Read all items
-// app.get('/items', async (req, res) => {
-//     try {
-//         const items = await Item.find();
-//         res.json(items);
-//         console.log('server working')
-//     } catch (err) {
-//         console.error('server error')
-//         res.status(500).json({ message: err.message });
-//     }
-// });
-// Read Search item
 app.get('/items', async (req, res) => {
     try {
-        var name = req.query.name;
-        var clientId = req.query.clientId;
-        let query = {};
-        if  (name && clientId){
-            query = {
-                $or: [
-                    { "name": { $regex: '.' + name + '.', $options: 'i' } },
-                    { "clientId": { $regex: '.' + clientId + '.', $options: 'i' } }
-                ]
-            };
-            console.log(`query`, query, name);
-        }else if (name) {
-            console.log(`name`, name, `clientId`, clientId);
-            query = { "name": { $regex: '.' + name + '.', $options: 'i' } };
-        } else if (clientId) {
-            query = { "clientId": { $regex: '.' + clientId + '.', $options: 'i' } };
-        } 
-        const items = await Item.find(query);
-        console.log('items', items);
+        const items = await Item.find();
         res.json(items);
         console.log('server working')
     } catch (err) {
@@ -79,6 +50,35 @@ app.get('/items', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+// Read Search item
+// app.get('/items', async (req, res) => {
+//     try {
+//         var name = req.query.name;
+//         var clientId = req.query.clientId;
+//         let query = {};
+//         if  (name && clientId){
+//             query = {
+//                 $or: [
+//                     { "name": { $regex: '.' + name + '.', $options: 'i' } },
+//                     { "clientId": { $regex: '.' + clientId + '.', $options: 'i' } }
+//                 ]
+//             };
+//             console.log(`query`, query, name);
+//         }else if (name) {
+//             console.log(`name`, name, `clientId`, clientId);
+//             query = { "name": { $regex: '.' + name + '.', $options: 'i' } };
+//         } else if (clientId) {
+//             query = { "clientId": { $regex: '.' + clientId + '.', $options: 'i' } };
+//         } 
+//         const items = await Item.find(query);
+//         console.log('items', items);
+//         res.json(items);
+//         console.log('server working')
+//     } catch (err) {
+//         console.error('server error')
+//         res.status(500).json({ message: err.message });
+//     }
+// });
 
 // Read one item
 app.get('/items/:id', getItem, (req, res) => {
