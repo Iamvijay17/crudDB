@@ -59,20 +59,22 @@ app.get('/items', async (req, res) => {
         if (name && clientId) {
             query = {
                 $or: [
-                    { "name": { $regex: '.' + name + '.', $options: 'i' } },
-                    { "clientId": { $regex: '.' + clientId + '.', $options: 'i' } }
+                    { "name": { $regex: new RegExp('.*' + name + '.*', 'i') } },
+                    { "clientId": { $regex: new RegExp('.*' + clientId + '.*', 'i') } }
                 ]
             };
-            console.log(`query`, query, name);
         } else if (name) {
-            console.log(`name`, name, `clientId`, clientId);
-            query = { "name": { $regex: '.' + name + '.', $options: 'i' } };
+            // query = { "name": { $regex: '.' + name + '.', $options: 'i' } };
+            query = { "name": { $regex: new RegExp('.*' + name + '.*', 'i') } };
         } else if (clientId) {
-            query = { "clientId": { $regex: '.' + clientId + '.', $options: 'i' } };
+            query = { "clientId": { $regex: new RegExp('.*' + clientId + '.*', 'i') } };
         }
-        const items = await Item.find(query);
-        console.log('items', items);
-        res.json(items);
+
+        console.log('query', query);
+
+        const Data = await Item.find(query);
+        console.log('items', Data);
+        res.json(Data);
         console.log('server working')
     } catch (err) {
         console.error('server error')
