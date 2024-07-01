@@ -14,5 +14,5 @@ const itemSchema = new mongoose.Schema({
     clientId:String
 
 });
-// itemSchema.index({ name: 1 }); 
+itemSchema.index({ name: 1 }); 
 module.exports = mongoose.model('Item', itemSchema);
