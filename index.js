@@ -11,7 +11,6 @@ app.use(bodyParser.json());
 
 // Connect to MongoDB
 const connectDB = require("./connectDB");
-
 connectDB();
 
 
