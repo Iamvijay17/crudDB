@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Item = require('./models/item');
 require("dotenv").config();
-
+app.use(cors());
 const app = express();
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
