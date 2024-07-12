@@ -1,10 +1,10 @@
 // const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const Item = require('./models/item');
 require("dotenv").config();
-// app.use(cors());
 const app = express();
 const PORT = process.env.PORT;
 app.use(bodyParser.json());
@@ -13,7 +13,11 @@ app.use(bodyParser.json());
 const connectDB = require("./connectDB");
 connectDB();
 
-
+app.use(cors({
+    origin: 'https://crud-db.vercel.app', // Adjust this based on your setup
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+  }));
 
 
 
