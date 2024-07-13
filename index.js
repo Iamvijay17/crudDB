@@ -22,13 +22,10 @@ app.use(cors({
 
 
 
-const dbName = 'crudDB';
-// Collection Name
-const collectionName = 'items';
-// Routes
+
 
 // Create a new item
-app.post('/items', async (req, res) => {
+app.post('/api/items', async (req, res) => {
     try {
         const newItem = new Item(req.body);
         await newItem.save();
@@ -42,20 +39,14 @@ app.get('/', (req, res) => {
     console.log('working')
     res.send('Hello World!');
 });
+app.get('/api', (req, res) => {
+    console.log('working')
+    res.send('API working fine ✌️!');
+});
 
-// Read all items
-// app.get('/items', async (req, res) => {
-//     try {
-//         const items = Item.find();
-//         res.json(items);
-//         console.log('server working')
-//     } catch (err) {
-//         console.error('server error')
-//         res.status(500).json({ message: err.message });
-//     }
-// });
+
 // Read Search item
-app.get('/items', async (req, res) => {
+app.get('/api/items', async (req, res) => {
     try {
         var name = req.query.name;
         var clientId = req.query.clientId;
@@ -87,12 +78,12 @@ app.get('/items', async (req, res) => {
 });
 
 // Read one item
-app.get('/items/:id', getItem, (req, res) => {
+app.get('/api/items/:id', getItem, (req, res) => {
     res.json(res.item);
 });
 
 // Update one item
-app.patch('/items/:id', getItem, async (req, res) => {
+app.patch('/api/items/:id', getItem, async (req, res) => {
     if (req.body.name != null) {
         res.item.name = req.body.name;
     }
@@ -111,7 +102,7 @@ app.patch('/items/:id', getItem, async (req, res) => {
 });
 
 // Delete one item
-app.delete('/items/:id', getItem, async (req, res) => {
+app.delete('/api/items/:id', getItem, async (req, res) => {
     try {
         await res.item.remove();
         res.json({ message: 'Deleted item' });
