@@ -13,13 +13,12 @@ app.use(bodyParser.json());
 const connectDB = require("./connectDB");
 connectDB();
 
-app.use(cors({
-    origin: 'https://crud-db.vercel.app', // Adjust this based on your setup
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-  }));
-
-
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // Allow from any origin
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
 
 
 
